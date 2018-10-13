@@ -13,6 +13,7 @@ RUN set -x \
     libfreetype6-dev \
     libjpeg-dev \
     libxml2 \
+    libgd-dev \
     libpng-dev \
     libbz2-dev \
     libzip-dev \
@@ -32,7 +33,10 @@ RUN set -x \
 RUN docker-php-ext-install \
     bz2 \
     bcmath \
-    mbstring
+    mbstring \
+    gd
+
+RUN docker-php-ext-enable gd
 
 RUN pecl install imagick-3.4.3
 RUN docker-php-ext-enable imagick
