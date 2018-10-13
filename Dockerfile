@@ -1,24 +1,25 @@
 FROM php:7.1-fpm
 
 # Install packages
+# RUN sudo sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
+
+RUN apt-get update -qq
 
 RUN set -x \
-    && apt-get install \
-    imagemagick-dev \
+    && apt-get install -y \
+    imagemagick \
+    libmagickwand-dev \
     libtool \
-    libcurl \
-    freetype-dev \
-    libjpeg-turbo-dev \
-    libxml2-dev \
+    libfreetype6-dev \
+    libjpeg-dev \
+    libxml2 \
     libpng-dev \
-    bzip2-dev \
-    libressl-dev \
+    libbz2-dev \
     libzip-dev \
     curl \
     git \
     gnupg \
-    cyrus-sasl-dev \
-    zlib-dev \
+    zlib1g \
     make \
     wget \
     openssh-client \
@@ -26,21 +27,18 @@ RUN set -x \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
         --with-png-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd
+        --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install \
     bz2 \
     bcmath \
     mbstring
 
-RUN pecl install \
-    imagick-3.4.3 \
-    zip
+RUN pecl install imagick-3.4.3
+RUN docker-php-ext-enable imagick
 
-RUN docker-php-ext-enable \
-    imagick \
-    zip
+RUN pecl install zip
+RUN docker-php-ext-enable zip
 
 # Install node
 
