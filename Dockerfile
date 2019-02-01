@@ -34,7 +34,9 @@ RUN docker-php-ext-install \
     bz2 \
     bcmath \
     mbstring \
-    gd
+    gd \
+    mysqli \
+    sqlite
 
 RUN docker-php-ext-enable gd
 
