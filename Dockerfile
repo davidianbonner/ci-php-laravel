@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 # Install packages
 # RUN sudo sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
