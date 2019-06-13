@@ -34,6 +34,7 @@ RUN docker-php-ext-install \
     mysqli \
     pdo \
     pdo_mysql \
+    pdo_pgsql \
     bz2 \
     bcmath \
     mbstring \
@@ -44,6 +45,9 @@ RUN docker-php-ext-enable gd
 
 RUN pecl install imagick-3.4.3
 RUN docker-php-ext-enable imagick
+
+RUN pecl install redis
+RUN docker-php-ext-enable redis
 
 RUN pecl install zip
 RUN docker-php-ext-enable zip
