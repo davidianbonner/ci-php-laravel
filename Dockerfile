@@ -25,10 +25,12 @@ RUN set -x \
     zlib1g \
     make \
     wget \
-    openssh-client
+    openssh-client \
+    && docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg
 
 RUN docker-php-ext-install \
-    intl \
     mysqli \
     pdo \
     pdo_mysql \
@@ -39,11 +41,7 @@ RUN docker-php-ext-install \
     pcntl \
     gd
 
-RUN docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg
-
-RUN docker-php-ext-configure intl
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 RUN docker-php-ext-enable gd
 
